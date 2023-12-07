@@ -1,12 +1,10 @@
-import 'package:bulloak_fin_mgt_fin_mgt/screens/history_nav/history/history_nav.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/history_nav/history/history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../screens/investment/inv_packages.dart';
-import '../screens/transactions/deposit.dart';
-import '../screens/transactions/withdraw.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({
@@ -61,10 +59,17 @@ class MainDrawer extends StatelessWidget {
               ),
               ListTile(
                 onTap: () {
-                  Get.to(() => const HistoryNav());
+                  Get.to(() => const History());
                 },
                 leading: const Icon(Iconsax.refresh),
                 title: Text('History', style: GoogleFonts.poppins()),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed('/transactionHistory');
+                },
+                leading: const Icon(Iconsax.transaction_minus4),
+                title: Text('Transactions', style: GoogleFonts.poppins()),
               ),
               ///////Expansion tile
               ExpansionTile(
@@ -113,11 +118,7 @@ class MainDrawer extends StatelessWidget {
                   ),
                 ],
               ),
-              ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.person_outlined),
-                title: Text('My Profile', style: GoogleFonts.poppins()),
-              ),
+
               ListTile(
                 onTap: () {},
                 leading: const Icon(Icons.people_outline),

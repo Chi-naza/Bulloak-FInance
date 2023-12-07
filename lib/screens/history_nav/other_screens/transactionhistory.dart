@@ -2,6 +2,7 @@ import 'package:bulloak_fin_mgt_fin_mgt/colors.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/data/transactions_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -160,7 +161,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
           SizedBox(height: h * 0.02),
           Container(
             width: w,
-            height: h * 0.569,
+            height: 540.h,
             decoration: BoxDecoration(color: Colors.white, boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),

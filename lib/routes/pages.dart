@@ -4,6 +4,7 @@ import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/login.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/otp_verification.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery.dart/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/sign_up.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/history_nav/other_screens/transactionhistory.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/home_nav/home_nav.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/investment/inv_plans.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/deposit.dart';
@@ -62,6 +63,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.dashboard,
       page: () => const DashBoard(),
+    ),
+    GetPage(
+      name: AppRoutes.transactionHistory,
+      page: () => const TransactionHistory(),
     ),
   ];
 }

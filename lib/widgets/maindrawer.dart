@@ -48,7 +48,9 @@ class MainDrawer extends StatelessWidget {
                 title: Text('Withdraw', style: GoogleFonts.poppins()),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed('/makeTransfer');
+                },
                 leading: const Icon(Iconsax.transaction_minus4),
                 title: Text('Transfer', style: GoogleFonts.poppins()),
               ),

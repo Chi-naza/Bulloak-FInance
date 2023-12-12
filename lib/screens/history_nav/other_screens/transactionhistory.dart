@@ -179,7 +179,6 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                   var parsedDate = DateTime.parse(txn.created!);
                   var createdAt = DateFormat('EEE, M/d/y').format(parsedDate);
                   print(createdAt);
-
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: h * 0.008),
                     child: ListTile(

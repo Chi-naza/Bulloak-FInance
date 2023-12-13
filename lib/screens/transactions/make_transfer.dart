@@ -1,8 +1,11 @@
 import 'dart:ffi';
 
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:number_text_input_formatter/number_text_input_formatter.dart';
 
 import '../../colors.dart';
 import '../../controllers/transferController.dart';
@@ -20,7 +23,7 @@ class _MakeTransferState extends State<MakeTransfer> {
 
   TextEditingController textEditingController = TextEditingController();
 
-  String paste = '';
+  String walletAddress = '';
 
   @override
   Widget build(BuildContext context) {
@@ -64,19 +67,14 @@ class _MakeTransferState extends State<MakeTransfer> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(top: h * 0.01),
+                      padding: EdgeInsets.only(
+                        top: h * 0.01,
+                      ),
                       child: TextFormField(
                         controller: textEditingController,
                         style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
-                          hintText: ' Enter Wallet Address',
-                          suffix: GestureDetector(
-                            onTap: () => print('trying to add paste'),
-                            child: const Text(
-                              'PASTE',
-                              style: TextStyle(color: AppColors.primaryColor),
-                            ),
-                          ),
+                          hintText: 'Enter Wallet Address',
                           focusedBorder: const OutlineInputBorder(
                             // borderRadius: BorderRadius.circular(w * 0.05),
                             borderSide: BorderSide(
@@ -109,10 +107,10 @@ class _MakeTransferState extends State<MakeTransfer> {
                     Container(
                       padding: EdgeInsets.only(top: h * 0.01),
                       child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.number,
                         style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
-                          hintText: ' Enter Email Address',
+                          hintText: 'Enter Email Address',
                           focusedBorder: const OutlineInputBorder(
                             // borderRadius: BorderRadius.circular(w * 0.05),
                             borderSide: BorderSide(
@@ -145,6 +143,20 @@ class _MakeTransferState extends State<MakeTransfer> {
                     Container(
                       padding: EdgeInsets.only(top: h * 0.01),
                       child: TextFormField(
+                        inputFormatters: [
+                          NumberTextInputFormatter(
+                            integerDigits: 10,
+                            decimalDigits: 2,
+                            maxValue: '1000000000.00',
+                            decimalSeparator: '.',
+                            groupDigits: 3,
+                            groupSeparator: ',',
+                            allowNegative: false,
+                            overrideDecimalPoint: true,
+                            insertDecimalPoint: false,
+                            insertDecimalDigits: true,
+                          ),
+                        ],
                         keyboardType: TextInputType.number,
                         style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(

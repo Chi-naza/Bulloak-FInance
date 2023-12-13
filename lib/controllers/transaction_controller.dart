@@ -171,4 +171,42 @@ class TransactionController extends GetxController {
       debugPrint("GET ALL TRANSACTIONS HISTORY ERROR: $e");
     }
   }
+
+  // withdraw function
+  Future<void> transferMyFunds({
+    required String email,
+    required String amount,
+  }) async {
+    // loading
+    isLoading.value = true;
+
+    var myBody = jsonEncode({
+      "email": email,
+      "usdt_amount": amount,
+    });
+
+    try {
+      Response response = await _getConnect.post(
+        BulloakAPI.transferEndpoint,
+        myBody,
+        headers: await myHeaders(),
+      );
+
+      if (kDebugMode) print("TRANSFER txn BODY: ${response.body}");
+      if (kDebugMode) print("STATUS: ${response.statusCode}");
+
+      if (response.statusCode == 200) {
+        isLoading.value = false;
+        bulloakSnackbar(
+            isError: false, message: "Successful! ${response.body}");
+        Get.toNamed(AppRoutes.homenav);
+      } else {
+        isLoading.value = false;
+        bulloakSnackbar(isError: true, message: "TRANSFER txn failed");
+      }
+    } catch (e) {
+      isLoading.value = false;
+      debugPrint("TRANSFER txn: $e");
+    }
+  }
 }

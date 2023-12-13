@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bulloak_fin_mgt_fin_mgt/models/dep_hist_model.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/models/referral_model.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/models/transaction_model.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/routes/names.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/services/api_endpoints.dart';
@@ -19,8 +20,14 @@ class TransactionController extends GetxController {
   // plan withdrawal history list
   final withdrawalHistoryList = <DepWithDrawalModel>[].obs;
 
-  // plan withdrawal history list
+  // transactions
   final transactionList = <TransactionModel>[].obs;
+  final depositTxnList = <TransactionModel>[].obs;
+  final withdrawTxnList = <TransactionModel>[].obs;
+  final transferTxnList = <TransactionModel>[].obs;
+
+  // referral list
+  final referralList = <ReferralModel>[].obs;
 
   @override
   void onReady() {
@@ -161,7 +168,31 @@ class TransactionController extends GetxController {
           dataList.add(TransactionModel.fromJson(a));
         }
         transactionList.assignAll(dataList);
-        if (kDebugMode) print(dataList);
+
+        // data lists for formatting individual txns
+        var withdrawDataList = <TransactionModel>[];
+        var transferDataList = <TransactionModel>[];
+        var depositDataList = <TransactionModel>[];
+
+        // getting individual Transactions
+        for (var txn in transactionList) {
+          if (txn.transactionType == "withdraw") {
+            withdrawTxnList.add(txn);
+          } else if (txn.transactionType == "transfer") {
+            transferDataList.add(txn);
+          } else if (txn.transactionType == "deposit") {
+            depositDataList.add(txn);
+          }
+        }
+
+        withdrawTxnList.assignAll(withdrawDataList);
+        transferTxnList.assignAll(transferDataList);
+        depositTxnList.assignAll(depositDataList);
+
+        if (kDebugMode) print("ALL TXN: $transactionList");
+        if (kDebugMode) print("ALL DEPOSIT: $withdrawTxnList");
+        if (kDebugMode) print("ALL TRANSFER: $transferTxnList");
+        if (kDebugMode) print("ALL DEPOSIT: $depositTxnList");
       } else {
         isLoading.value = false;
         if (kDebugMode) print("Failed To Get ALL TRANSACTIONS History");
@@ -198,7 +229,7 @@ class TransactionController extends GetxController {
       if (response.statusCode == 200) {
         isLoading.value = false;
         bulloakSnackbar(
-            isError: false, message: "Successful! ${response.body}");
+            isError: false, message: "Transfer Successful! ${response.body}");
         Get.toNamed(AppRoutes.homenav);
       } else {
         isLoading.value = false;
@@ -207,6 +238,36 @@ class TransactionController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       debugPrint("TRANSFER txn: $e");
+    }
+  }
+
+  // fetch withdrawal histories
+  Future<void> fetchMyReferrals() async {
+    try {
+      Response response = await _getConnect.get(
+        BulloakAPI.referralEndpoint,
+        headers: await myHeaders(),
+      );
+
+      if (kDebugMode) print("GET REFERRAL : ${response.body}");
+      if (kDebugMode) print("STATUS: ${response.statusCode}");
+
+      if (response.statusCode == 200) {
+        isLoading.value = false;
+        if (kDebugMode) print("ALL REFERRALs GOTTEN successfully");
+        var dataList = <ReferralModel>[];
+        for (var a in response.body) {
+          dataList.add(ReferralModel.fromJson(a));
+        }
+        referralList.assignAll(dataList);
+        if (kDebugMode) print(dataList);
+      } else {
+        isLoading.value = false;
+        if (kDebugMode) print("Failed To Get ALL REFERRALs");
+      }
+    } catch (e) {
+      isLoading.value = false;
+      debugPrint("GET ALL REFERRALs  ERROR: $e");
     }
   }
 }

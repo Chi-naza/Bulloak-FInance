@@ -302,8 +302,8 @@ class _HomePageState extends State<DashBoard> {
                                 decoration: kInnerDecoration,
                                 child: GestureDetector(
                                   onTap: () async {
-                                    var pc = Get.put(PlanController());
-                                    await pc.fetchAllPlans();
+                                    var pc = Get.find<TransactionController>();
+                                    await pc.fetchAllTransactions();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

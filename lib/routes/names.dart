@@ -11,6 +11,8 @@ class AppRoutes {
   static const dashboard = '/dashboard';
   static const deposit = '/deposit';
   static const withdrawal = '/withdrawal';
+  static const transactionHistory = '/transactionHistory';
+  static const makeTransfer = '/makeTransfer';
 
   // static const Login = '/login';
   // static const INITIAL = '/';

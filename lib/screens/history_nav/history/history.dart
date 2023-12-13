@@ -1,5 +1,6 @@
 import 'package:bulloak_fin_mgt_fin_mgt/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,7 +17,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -25,32 +26,28 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  //tab item
-  final List<Tab> _tabs = const [
-    Tab(text: 'All'),
-    Tab(text: 'Deposits'),
-    Tab(text: 'Withdrawals'),
-    Tab(text: 'Referrals'),
-    Tab(text: 'Investments'),
+  // //tab item
+  final List<Widget> _tabs = const [
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      child: Tab(text: 'Deposits'),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: Tab(text: 'Withdrawals'),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      child: Tab(text: 'Referrals'),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: Tab(text: 'Investments'),
+    ),
   ];
 
   //tab body
   final List<Widget> _tabsBody = [
-    ReusableTabBody(
-      avatar: const CircleAvatar(
-        backgroundColor: Colors.white,
-        radius: 25,
-      ),
-      title: Text('Today 4:17pm', style: GoogleFonts.poppins(fontSize: 12)),
-      subtitle: Text('User',
-          style:
-              GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500)),
-      trailing: Text('\$10.00',
-          style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: AppColors.secondaryColor,
-              fontWeight: FontWeight.w400)),
-    ),
     ReusableTabBody(
       avatar: const CircleAvatar(
         backgroundColor: Colors.white,
@@ -117,6 +114,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
+    print('device height = $h\ndevice width = $w');
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -132,7 +130,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
             SingleChildScrollView(
               child: Container(
                 width: w,
-                height: h * 0.49,
+                height: 480.h,
                 decoration: BoxDecoration(
                   color: AppColors.secondaryColor.withOpacity(0.1),
                   borderRadius: const BorderRadius.only(
@@ -140,46 +138,46 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                     topRight: Radius.circular(30.0),
                   ),
                 ),
-                child: OverflowBox(
-                  maxHeight: h * 0.5,
-                  minHeight: h * 0.4,
-                  child: Column(children: [
-                    Padding(
-                      padding: EdgeInsets.all(h * 0.015),
-                      child: Container(
-                        height: h * 0.008,
-                        width: w * 0.1,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffAAAAAA),
-                            borderRadius: BorderRadius.circular(50)),
-                      ),
+                child: Column(children: [
+                  Padding(
+                    padding: EdgeInsets.all(h * 0.015),
+                    child: Container(
+                      height: h * 0.008,
+                      width: w * 0.1,
+                      decoration: BoxDecoration(
+                          color: const Color(0xffAAAAAA),
+                          borderRadius: BorderRadius.circular(50)),
                     ),
-                    Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: kToolbarHeight - 30,
-                              child: TabBar(
-                                controller: _tabController,
-                                tabs: _tabs,
-                                labelColor: Colors.white,
-                                indicator: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(80),
-                                    color: AppColors.primaryColor),
-                                indicatorSize: TabBarIndicatorSize.tab,
-                              ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: kToolbarHeight - 33,
+                            child: TabBar(
+                              // isScrollable: true,
+                              controller: _tabController,
+                              tabs: _tabs,
+                              labelColor: Colors.white,
+                              indicator: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(80),
+                                  color: AppColors.primaryColor),
+                              indicatorSize: TabBarIndicatorSize.label,
+                              labelPadding: EdgeInsets.zero,
+                              indicatorPadding: EdgeInsets.zero,
+                              padding: EdgeInsets.zero,
                             ),
-                          ],
-                        )),
-                    Expanded(
-                        flex: 8,
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: _tabsBody,
-                        ))
-                  ]),
-                ),
+                          ),
+                        ],
+                      )),
+                  Expanded(
+                      flex: 14,
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: _tabsBody,
+                      ))
+                ]),
               ),
             )
           ]),

@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:number_text_input_formatter/number_text_input_formatter.dart';

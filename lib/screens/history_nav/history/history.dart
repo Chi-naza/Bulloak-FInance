@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final bucketGlobal = PageStorageBucket();
+
 class History extends StatefulWidget {
   const History({super.key});
 
@@ -49,6 +51,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   //tab body
   final List<Widget> _tabsBody = [
     ReusableTabBody(
+      key: const PageStorageKey('pageOne'),
       avatar: const CircleAvatar(
         backgroundColor: Colors.white,
         radius: 25,
@@ -68,6 +71,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
               fontWeight: FontWeight.w400)),
     ),
     ReusableTabBody(
+      key: const PageStorageKey('pageTwo'),
       avatar: const CircleAvatar(
         backgroundColor: Colors.white,
         radius: 25,
@@ -85,6 +89,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
               fontSize: 13, color: Colors.red, fontWeight: FontWeight.w400)),
     ),
     ReusableTabBody(
+      key: const PageStorageKey('pageThree'),
       avatar: const CircleAvatar(backgroundColor: Colors.white, radius: 25),
       title: Text('Today 4:17pm', style: GoogleFonts.poppins(fontSize: 12)),
       subtitle: Text('User',
@@ -97,6 +102,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
               fontWeight: FontWeight.w400)),
     ),
     ReusableTabBody(
+      key: const PageStorageKey('pageFour'),
       avatar: const CircleAvatar(backgroundColor: Colors.white, radius: 25),
       title: Text('Today 4:17pm', style: GoogleFonts.poppins(fontSize: 12)),
       subtitle: Text('User',
@@ -114,7 +120,6 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
-    print('device height = $h\ndevice width = $w');
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -138,46 +143,49 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                     topRight: Radius.circular(30.0),
                   ),
                 ),
-                child: Column(children: [
-                  Padding(
-                    padding: EdgeInsets.all(h * 0.015),
-                    child: Container(
-                      height: h * 0.008,
-                      width: w * 0.1,
-                      decoration: BoxDecoration(
-                          color: const Color(0xffAAAAAA),
-                          borderRadius: BorderRadius.circular(50)),
+                child: PageStorage(
+                  bucket: bucketGlobal,
+                  child: Column(children: [
+                    Padding(
+                      padding: EdgeInsets.all(h * 0.015),
+                      child: Container(
+                        height: h * 0.008,
+                        width: w * 0.1,
+                        decoration: BoxDecoration(
+                            color: const Color(0xffAAAAAA),
+                            borderRadius: BorderRadius.circular(50)),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: kToolbarHeight - 33,
-                            child: TabBar(
-                              // isScrollable: true,
-                              controller: _tabController,
-                              tabs: _tabs,
-                              labelColor: Colors.white,
-                              indicator: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(80),
-                                  color: AppColors.primaryColor),
-                              indicatorSize: TabBarIndicatorSize.label,
-                              labelPadding: EdgeInsets.zero,
-                              indicatorPadding: EdgeInsets.zero,
-                              padding: EdgeInsets.zero,
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: kToolbarHeight - 33,
+                              child: TabBar(
+                                // isScrollable: true,
+                                controller: _tabController,
+                                tabs: _tabs,
+                                labelColor: Colors.white,
+                                indicator: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(80),
+                                    color: AppColors.primaryColor),
+                                indicatorSize: TabBarIndicatorSize.label,
+                                labelPadding: EdgeInsets.zero,
+                                indicatorPadding: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
+                              ),
                             ),
-                          ),
-                        ],
-                      )),
-                  Expanded(
-                      flex: 14,
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: _tabsBody,
-                      ))
-                ]),
+                          ],
+                        )),
+                    Expanded(
+                        flex: 14,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: _tabsBody,
+                        ))
+                  ]),
+                ),
               ),
             )
           ]),

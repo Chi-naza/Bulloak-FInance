@@ -1,3 +1,4 @@
+import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/profile.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/history_nav/history/history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class MainDrawer extends StatelessWidget {
                 title: Text('Transfer', style: GoogleFonts.poppins()),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () => Get.toNamed('/cards'),
                 leading: const Icon(Icons.credit_card_rounded),
                 title: Text('Card Application', style: GoogleFonts.poppins()),
               ),
@@ -111,7 +112,7 @@ class MainDrawer extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: w * 0.1),
                     child: ListTile(
-                      onTap: () {},
+                      onTap: () => Get.toNamed('/expectedProfit'),
                       visualDensity:
                           const VisualDensity(horizontal: 0, vertical: -4),
                       title:
@@ -125,6 +126,13 @@ class MainDrawer extends StatelessWidget {
                 onTap: () {},
                 leading: const Icon(Icons.people_outline),
                 title: Text('Referrals', style: GoogleFonts.poppins()),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.to(const ProfileScreen());
+                },
+                leading: const Icon(Icons.person),
+                title: Text('Profile', style: GoogleFonts.poppins()),
               ),
               Divider(color: Colors.grey.shade800),
               ListTile(

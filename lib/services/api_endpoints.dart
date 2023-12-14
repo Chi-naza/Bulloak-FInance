@@ -29,4 +29,8 @@ class BulloakAPI {
   static const String withdrawEndpoint = "$baseUrl/withdraw/"; // POST
   static const String depositEndpoint = "$baseUrl/deposit/"; // POST
   static const String allTxnEndpoint = "$baseUrl/transaction/dashboard"; //GET
+  static const String transferEndpoint = "$baseUrl/transfer/"; //POST
+
+  // REFERRAL
+  static const String referralEndpoint = "$baseUrl/referral/"; //GET
 }

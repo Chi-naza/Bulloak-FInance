@@ -1,3 +1,4 @@
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,11 +16,24 @@ class MakeTransfer extends StatefulWidget {
 }
 
 class _MakeTransferState extends State<MakeTransfer> {
-  final transferController = TransferController;
+  // Txn controller
+  var txnController = Get.find<TransactionController>();
 
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+  TextEditingController walletAddressController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   String walletAddress = '';
+
+  var transferFormKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    amountController.dispose();
+    walletAddressController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +66,7 @@ class _MakeTransferState extends State<MakeTransfer> {
               ), //////////////
               SizedBox(height: h * 0.04),
               Form(
-                // key: depositFormKey,
+                key: transferFormKey,
                 child: Column(
                   children: [
                     Container(
@@ -67,7 +81,7 @@ class _MakeTransferState extends State<MakeTransfer> {
                         top: h * 0.01,
                       ),
                       child: TextFormField(
-                        controller: textEditingController,
+                        controller: walletAddressController,
                         style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           hintText: 'Enter Wallet Address',
@@ -86,7 +100,7 @@ class _MakeTransferState extends State<MakeTransfer> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Amount field cannnot be empty';
+                            return 'Wallet Address field cannnot be empty';
                           }
                           return null;
                         },
@@ -103,8 +117,9 @@ class _MakeTransferState extends State<MakeTransfer> {
                     Container(
                       padding: EdgeInsets.only(top: h * 0.01),
                       child: TextFormField(
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.emailAddress,
                         style: const TextStyle(color: Colors.black),
+                        controller: emailController,
                         decoration: InputDecoration(
                           hintText: 'Enter Email Address',
                           focusedBorder: const OutlineInputBorder(
@@ -121,7 +136,7 @@ class _MakeTransferState extends State<MakeTransfer> {
                               borderSide: const BorderSide(color: Colors.grey)),
                         ),
                         validator: (value) {
-                          if (value!.isEmpty) {
+                          if (!GetUtils.isEmail(value!)) {
                             return 'Enter a valid email address';
                           }
                           return null;
@@ -139,6 +154,7 @@ class _MakeTransferState extends State<MakeTransfer> {
                     Container(
                       padding: EdgeInsets.only(top: h * 0.01),
                       child: TextFormField(
+                        controller: amountController,
                         inputFormatters: [
                           NumberTextInputFormatter(
                             integerDigits: 10,
@@ -171,7 +187,7 @@ class _MakeTransferState extends State<MakeTransfer> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Wallet Address field cannnot be empty';
+                            return 'Amount field cannnot be empty';
                           }
                           return null;
                         },
@@ -181,15 +197,25 @@ class _MakeTransferState extends State<MakeTransfer> {
                 ),
               ),
               SizedBox(height: h * 0.08),
-              GestureDetector(
-                  onTap: () {},
-                  child: CustomButton(
-                    height: h * 0.08,
-                    width: w * 0.8,
-                    text: 'Transfer',
-                    color: AppColors.secondaryColor,
-                    circularRadius: 50,
-                  )),
+              GestureDetector(onTap: () {
+                if (transferFormKey.currentState!.validate()) {
+                  // transfer function
+                  txnController.transferMyFunds(
+                    email: emailController.text.trim(),
+                    amount: amountController.text.trim(),
+                  );
+                }
+              }, child: Obx(() {
+                return CustomButton(
+                  height: h * 0.08,
+                  width: w * 0.8,
+                  text: txnController.isLoading.value
+                      ? 'Processing . . .'
+                      : 'Transfer',
+                  color: AppColors.secondaryColor,
+                  circularRadius: 50,
+                );
+              })),
               SizedBox(height: h * 0.08),
             ],
           ),

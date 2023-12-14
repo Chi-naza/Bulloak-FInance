@@ -2,6 +2,7 @@ import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:number_text_input_formatter/number_text_input_formatter.dart';
 
 import '../../colors.dart';
 import '../../widgets/custom_button.dart';
@@ -90,7 +91,21 @@ class _WithdrawState extends State<Withdraw> {
                 Container(
                   padding: EdgeInsets.only(top: h * 0.02),
                   child: TextFormField(
-                    keyboardType: TextInputType.emailAddress,
+                    inputFormatters: [
+                      NumberTextInputFormatter(
+                        integerDigits: 10,
+                        decimalDigits: 2,
+                        maxValue: '1000000000.00',
+                        decimalSeparator: '.',
+                        groupDigits: 3,
+                        groupSeparator: ',',
+                        allowNegative: false,
+                        overrideDecimalPoint: true,
+                        insertDecimalPoint: false,
+                        insertDecimalDigits: true,
+                      ),
+                    ],
+                    keyboardType: TextInputType.number,
                     style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       hintText: ' Enter Amount',

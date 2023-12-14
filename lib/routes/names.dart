@@ -13,6 +13,9 @@ class AppRoutes {
   static const withdrawal = '/withdrawal';
   static const transactionHistory = '/transactionHistory';
   static const makeTransfer = '/makeTransfer';
+  static const expectedProfit = '/expectedProfit';
+  static const profile = '/profile';
+  static const cards = '/cards';
 
   // static const Login = '/login';
   // static const INITIAL = '/';

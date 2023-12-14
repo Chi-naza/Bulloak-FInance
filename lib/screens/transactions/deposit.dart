@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:number_text_input_formatter/number_text_input_formatter.dart';
 
 import '../../colors.dart';
 import '../../widgets/custom_button.dart';
@@ -80,6 +81,20 @@ class _DepositState extends State<Deposit> {
                       Container(
                         padding: EdgeInsets.only(top: h * 0.02),
                         child: TextFormField(
+                          inputFormatters: [
+                            NumberTextInputFormatter(
+                              integerDigits: 10,
+                              decimalDigits: 2,
+                              maxValue: '1000000000.00',
+                              decimalSeparator: '.',
+                              groupDigits: 3,
+                              groupSeparator: ',',
+                              allowNegative: false,
+                              overrideDecimalPoint: true,
+                              insertDecimalPoint: false,
+                              insertDecimalDigits: true,
+                            ),
+                          ],
                           keyboardType: TextInputType.number,
                           style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
@@ -110,6 +125,20 @@ class _DepositState extends State<Deposit> {
                       Container(
                         padding: EdgeInsets.only(top: h * 0.02),
                         child: TextFormField(
+                          inputFormatters: [
+                            NumberTextInputFormatter(
+                              integerDigits: 10,
+                              decimalDigits: 2,
+                              maxValue: '1000000000.00',
+                              decimalSeparator: '.',
+                              groupDigits: 3,
+                              groupSeparator: ',',
+                              allowNegative: false,
+                              overrideDecimalPoint: true,
+                              insertDecimalPoint: false,
+                              insertDecimalDigits: true,
+                            ),
+                          ],
                           keyboardType: TextInputType.number,
                           style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(

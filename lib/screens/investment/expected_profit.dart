@@ -169,7 +169,7 @@ class ExpectedProfit extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         image: const DecorationImage(
                                             image: AssetImage(
-                                                'assets/images/creditcard.png')),
+                                                'assets/packages/forex.png')),
                                         borderRadius:
                                             BorderRadius.circular(20)),
                                   ),

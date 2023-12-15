@@ -1,11 +1,9 @@
-import 'package:bulloak_fin_mgt_fin_mgt/screens/history_nav/other_screens/transactionhistory.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../widgets/edit_profile.dart';
+import '../widgets/edit_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -15,14 +13,9 @@ class ProfileScreen extends StatelessWidget {
     var w = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          leading: GestureDetector(
-              onTap: () => Get.back(),
-              child: const Icon(Icons.arrow_back_ios))),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
           child: Column(
             children: [
               Center(

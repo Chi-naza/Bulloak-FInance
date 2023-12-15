@@ -16,6 +16,7 @@ class AppRoutes {
   static const expectedProfit = '/expectedProfit';
   static const profile = '/profile';
   static const cards = '/cards';
+  static const navbar = '/homeNav';
 
   // static const Login = '/login';
   // static const INITIAL = '/';

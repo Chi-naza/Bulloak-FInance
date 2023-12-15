@@ -1,14 +1,12 @@
-import 'package:bulloak_fin_mgt_fin_mgt/models/user_dashboardmodel.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/routes/names.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/launch.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/login.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/otp_verification.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/profile.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/profile.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery.dart/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/sign_up.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/cards.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/history_nav/other_screens/transactionhistory.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/home_nav/home_nav.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/history/transactionhistory.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/investment/expected_profit.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/investment/inv_plans.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/deposit.dart';
@@ -16,8 +14,9 @@ import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/make_transfer.dart'
 import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/withdraw.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/splash_screen.dart';
 import 'package:get/get.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/nav_screens/dashboard.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/dashboard.dart';
 import '../screens/auth/recovery.dart/forgot_password.dart';
+import '../screens/navbar/navbar.dart';
 
 class AppPages {
   static final List<GetPage> routes = [
@@ -45,10 +44,10 @@ class AppPages {
         name: AppRoutes.otpverify,
         page: () => const OTPVerification(),
         transition: Transition.rightToLeft),
-    GetPage(
-        name: AppRoutes.homenav,
-        page: () => const HomeNav(),
-        transition: Transition.rightToLeft),
+    // GetPage(
+    //     name: AppRoutes.homenav,
+    //     page: () => const HomeNav(),
+    //     transition: Transition.rightToLeft),
     GetPage(
         name: AppRoutes.resetPSWD,
         page: () => const ResetPSWD(),
@@ -88,6 +87,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.cards,
       page: () => const Cards(),
+    ),
+    GetPage(
+      name: AppRoutes.navbar,
+      page: () => const HomeNav(),
     ),
   ];
 }

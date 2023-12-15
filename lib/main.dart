@@ -3,6 +3,7 @@ import 'package:bulloak_fin_mgt_fin_mgt/controllers/auth_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/plan_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/routes/pages.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/navbar/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
                 ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
             useMaterial3: true,
           ),
-          initialRoute: '/dashboard',
+          initialRoute: '/homeNav',
           getPages: AppPages.routes,
           onInit: () {
             Get.put(AuthController(), permanent: true);

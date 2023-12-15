@@ -1,5 +1,5 @@
-import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/profile.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/history_nav/history/history.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/profile.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/history/history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -127,13 +127,7 @@ class MainDrawer extends StatelessWidget {
                 leading: const Icon(Icons.people_outline),
                 title: Text('Referrals', style: GoogleFonts.poppins()),
               ),
-              ListTile(
-                onTap: () {
-                  Get.to(const ProfileScreen());
-                },
-                leading: const Icon(Icons.person),
-                title: Text('Profile', style: GoogleFonts.poppins()),
-              ),
+
               Divider(color: Colors.grey.shade800),
               ListTile(
                 onTap: () {},

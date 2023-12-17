@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/edit_profile.dart';
+import '../../widgets/edit_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
                       'assets/images/user.png'), //user's profile pic
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 10),
               Text(
                 'Omeje Sky',
                 style: GoogleFonts.poppins(
@@ -40,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 110.w),
+                padding: EdgeInsets.symmetric(horizontal: 100.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               Container(
-                height: 300.h,
+                height: 315.h,
                 width: w,
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
@@ -136,29 +136,32 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               // 0
-              Container(
-                height: 50.h,
-                width: w,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Total Assets',
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          'View your total assets and earnings',
-                          style: GoogleFonts.poppins(),
-                        )
-                      ]),
+              GestureDetector(
+                onTap: () => Get.toNamed('/totalAssets'),
+                child: Container(
+                  height: 50.h,
+                  width: w,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Total Assets',
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            'View your total assets and earnings',
+                            style: GoogleFonts.poppins(),
+                          )
+                        ]),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),

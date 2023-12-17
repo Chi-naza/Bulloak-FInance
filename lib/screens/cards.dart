@@ -56,7 +56,22 @@ class Cards extends StatelessWidget {
             child: Column(
               children: [
                 CreditCardWidget(
-                  glassmorphismConfig: Glassmorphism.defaultConfig(),
+                  glassmorphismConfig: Glassmorphism(
+                    blurX: 0,
+                    blurY: 0,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                        Colors.grey.withAlpha(20),
+                        Colors.white.withAlpha(20),
+                      ],
+                      stops: const <double>[
+                        0.3,
+                        0,
+                      ],
+                    ),
+                  ),
                   cardNumber: '',
                   expiryDate: '',
                   cardHolderName: '',
@@ -68,6 +83,7 @@ class Cards extends StatelessWidget {
                   showBackView: true,
                   obscureCardNumber: true,
                   obscureCardCvv: true,
+                  enableFloatingCard: true,
                   isHolderNameVisible: true,
                   cardBgColor: Colors.black,
                   backgroundImage: 'assets/images/card_bg.png',
@@ -76,7 +92,7 @@ class Cards extends StatelessWidget {
                       (CreditCardBrand creditCardBrand) {},
                   customCardTypeIcons: <CustomCardTypeIcon>[
                     CustomCardTypeIcon(
-                      cardType: CardType.mastercard,
+                      cardType: CardType.mastercard, //type of card
                       cardImage: Image.asset(
                         'assets/images/mastercard.png',
                         height: 48,

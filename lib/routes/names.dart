@@ -17,6 +17,7 @@ class AppRoutes {
   static const profile = '/profile';
   static const cards = '/cards';
   static const navbar = '/homeNav';
+  static const totalAssets = '/totalAssets';
 
   // static const Login = '/login';
   // static const INITIAL = '/';

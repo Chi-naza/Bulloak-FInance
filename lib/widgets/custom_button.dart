@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({
-    super.key,
-    required this.height,
-    required this.width,
-    required this.text,
-    required this.circularRadius,
-    this.fontWeight,
-    this.icon,
-    this.color,
-    this.boxShadow,
-  });
+  const CustomButton(
+      {super.key,
+      required this.height,
+      required this.width,
+      required this.text,
+      required this.circularRadius,
+      this.fontWeight,
+      this.icon,
+      this.color,
+      this.boxShadow,
+      this.fontSize,
+      this.textColor});
 
   final double height;
   final double width;
@@ -22,6 +23,8 @@ class CustomButton extends StatelessWidget {
   final Widget? icon;
   final Color? color;
   final FontWeight? fontWeight;
+  final double? fontSize;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +49,11 @@ class CustomButton extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.poppins(
-                  fontSize: w * 0.05,
-                  color: Colors.white,
-                  fontWeight:
-                      fontWeight == null ? FontWeight.bold : fontWeight),
+                  fontSize: fontSize ?? w * 0.05,
+                  // fontSize: w * 0.05,
+                  color: textColor ?? Colors.white,
+                  // color: Colors.white,
+                  fontWeight: fontWeight ?? FontWeight.bold),
             ),
           ],
         ),

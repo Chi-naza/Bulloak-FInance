@@ -1,4 +1,3 @@
-import 'package:bulloak_fin_mgt_fin_mgt/screens/profile/profile.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/history/history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

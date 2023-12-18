@@ -28,9 +28,9 @@ class AccountLimits extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(children: [
             Container(
-              height: 230.h,
+              height: 200.h,
               width: w,
-              margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
+              margin: EdgeInsets.symmetric(horizontal: 13.w, vertical: 12.h),
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(15),
@@ -54,7 +54,7 @@ class AccountLimits extends StatelessWidget {
                             'Tier',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: Colors.white),
                           ),
                           Text(
@@ -62,7 +62,7 @@ class AccountLimits extends StatelessWidget {
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
-                                fontSize: 15),
+                                fontSize: 14),
                           )
                         ],
                       ),
@@ -73,14 +73,14 @@ class AccountLimits extends StatelessWidget {
                           Text(
                             'Name',
                             style: GoogleFonts.poppins(
-                                color: Colors.white, fontSize: 15),
+                                color: Colors.white, fontSize: 14),
                           ),
                           Text(
                             'Omeje Faith Sky'.toUpperCase(),
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
-                                fontSize: 20),
+                                fontSize: 18),
                           )
                         ],
                       ),
@@ -91,14 +91,14 @@ class AccountLimits extends StatelessWidget {
                           Text(
                             'Email',
                             style: GoogleFonts.poppins(
-                                color: Colors.white, fontSize: 15),
+                                color: Colors.white, fontSize: 14),
                           ),
                           Text(
                             'faith@gmail.com',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
-                                fontSize: 15),
+                                fontSize: 14),
                           )
                         ],
                       ),
@@ -109,14 +109,14 @@ class AccountLimits extends StatelessWidget {
                           Text(
                             'Date of birth',
                             style: GoogleFonts.poppins(
-                                color: Colors.white, fontSize: 15),
+                                color: Colors.white, fontSize: 14),
                           ),
                           Text(
                             '23/5/2001',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
-                                fontSize: 15),
+                                fontSize: 14),
                           )
                         ],
                       ),
@@ -127,14 +127,14 @@ class AccountLimits extends StatelessWidget {
                           Text(
                             'Address',
                             style: GoogleFonts.poppins(
-                                color: Colors.white, fontSize: 15),
+                                color: Colors.white, fontSize: 14),
                           ),
                           Text(
                             '*******',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
-                                fontSize: 15),
+                                fontSize: 14),
                           )
                         ],
                       ),
@@ -147,9 +147,9 @@ class AccountLimits extends StatelessWidget {
               child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => Container(
-                        height: 122.h,
+                        height: 110.h,
                         width: w,
-                        margin: EdgeInsets.symmetric(horizontal: 12.w),
+                        margin: EdgeInsets.symmetric(horizontal: 14.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
@@ -162,9 +162,10 @@ class AccountLimits extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 20),
+                              horizontal: 25, vertical: 12),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -236,7 +237,7 @@ class AccountLimits extends StatelessWidget {
                   },
                   itemCount: accountLimits.length),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 8.h),
             CustomButton(
               height: h * 0.07,
               width: w * 0.8,

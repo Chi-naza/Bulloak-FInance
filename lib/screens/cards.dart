@@ -102,7 +102,7 @@ class Cards extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 340.h,
+                  height: 320.h,
                   child: ListView.separated(
                     itemCount: cardScreenInfo.length,
                     physics: const NeverScrollableScrollPhysics(),
@@ -137,9 +137,10 @@ class Cards extends StatelessWidget {
                     },
                   ),
                 ),
+                SizedBox(height: 10.h),
                 CustomButton(
-                  height: h * 0.06,
-                  width: w * 0.7,
+                  height: h * 0.07,
+                  width: w * 0.8,
                   color: AppColors.primaryColor,
                   text: 'Get It Now',
                   fontWeight: FontWeight.normal,

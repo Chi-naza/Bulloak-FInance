@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
                 ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
             useMaterial3: true,
           ),
-          initialRoute: '/splashScreen',
+          initialRoute: '/homeNav',
           getPages: AppPages.routes,
           onInit: () {
             Get.put(AuthController(), permanent: true);

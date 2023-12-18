@@ -192,29 +192,32 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               // 2
-              Container(
-                height: 50.h,
-                width: w,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Account Limits',
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          'View your account limits',
-                          style: GoogleFonts.poppins(),
-                        )
-                      ]),
+              GestureDetector(
+                onTap: () => Get.toNamed('/accountLimits'),
+                child: Container(
+                  height: 50.h,
+                  width: w,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Account Limits',
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            'View your account limits',
+                            style: GoogleFonts.poppins(),
+                          )
+                        ]),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),

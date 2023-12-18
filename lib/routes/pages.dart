@@ -2,6 +2,7 @@ import 'package:bulloak_fin_mgt_fin_mgt/routes/names.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/launch.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/login.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/otp_verification.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/profile/account_limits.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/profile/profile.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery.dart/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/sign_up.dart';
@@ -9,7 +10,7 @@ import 'package:bulloak_fin_mgt_fin_mgt/screens/cards.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/history/transactionhistory.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/investment/expected_profit.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/investment/inv_plans.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/profile/totalAssets.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/profile/total_assets.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/deposit.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/make_transfer.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/withdraw.dart';
@@ -45,10 +46,6 @@ class AppPages {
         name: AppRoutes.otpverify,
         page: () => const OTPVerification(),
         transition: Transition.rightToLeft),
-    // GetPage(
-    //     name: AppRoutes.homenav,
-    //     page: () => const HomeNav(),
-    //     transition: Transition.rightToLeft),
     GetPage(
         name: AppRoutes.resetPSWD,
         page: () => const ResetPSWD(),
@@ -95,7 +92,11 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.totalAssets,
-      page: () => TotalAssets(),
+      page: () => const TotalAssets(),
+    ),
+    GetPage(
+      name: AppRoutes.accountLimits,
+      page: () => const AccountLimits(),
     ),
   ];
 }

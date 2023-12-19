@@ -19,6 +19,7 @@ import 'package:get/get.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/dashboard.dart';
 import '../screens/auth/recovery.dart/forgot_password.dart';
 import '../screens/navbar/navbar.dart';
+import '../screens/support.dart';
 
 class AppPages {
   static final List<GetPage> routes = [
@@ -97,6 +98,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.accountLimits,
       page: () => const AccountLimits(),
+    ),
+    GetPage(
+      name: AppRoutes.support,
+      page: () => const Support(),
     ),
   ];
 }

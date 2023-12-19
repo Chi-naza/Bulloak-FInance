@@ -19,6 +19,7 @@ class AppRoutes {
   static const navbar = '/homeNav';
   static const totalAssets = '/totalAssets';
   static const accountLimits = '/accountLimits';
+  static const support = '/support';
 
   // static const Login = '/login';
   // static const INITIAL = '/';

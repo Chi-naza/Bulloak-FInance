@@ -149,7 +149,7 @@ class AccountLimits extends StatelessWidget {
                   itemBuilder: (context, index) => Container(
                         height: 110.h,
                         width: w,
-                        margin: EdgeInsets.symmetric(horizontal: 14.w),
+                        margin: EdgeInsets.symmetric(horizontal: 10.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),

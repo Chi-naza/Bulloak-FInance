@@ -14,7 +14,7 @@ List accountLimits = [
   {
     'tier': 'Tier 3',
     'limit': '\$20,000.00',
-    'balance': '\$50,000.00',
+    'balance': '\$50,000,000.00',
     'currentLimit': ''
   },
 ];

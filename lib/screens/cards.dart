@@ -1,6 +1,5 @@
 import 'package:bulloak_fin_mgt_fin_mgt/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,136 +19,72 @@ class Cards extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          leading: GestureDetector(
-              onTap: () => Get.back(),
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              )),
-          title: const Text('Cards'),
-          flexibleSpace: Container(),
-          bottom: TabBar(tabs: [
-            Tab(
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "Physical Card",
-                  style: GoogleFonts.poppins(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-            Tab(
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "Virtual Card",
-                  style: GoogleFonts.poppins(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ]),
-        ),
+            leading: GestureDetector(
+                onTap: () => Get.back(),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                )),
+            title: const Text('Cards'),
+            flexibleSpace: Container(),
+            bottom: TabBar(tabs: [
+              Tab(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Physical Card",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, fontWeight: FontWeight.w500)))),
+              Tab(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Virtual Card",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, fontWeight: FontWeight.w500))))
+            ])),
         body: TabBarView(children: [
           SingleChildScrollView(
             child: Column(
               children: [
-                CreditCardWidget(
-                  glassmorphismConfig: Glassmorphism(
-                    blurX: 0,
-                    blurY: 0,
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: <Color>[
-                        Colors.grey.withAlpha(20),
-                        Colors.white.withAlpha(20),
-                      ],
-                      stops: const <double>[
-                        0.3,
-                        0,
-                      ],
-                    ),
-                  ),
-                  cardNumber: '',
-                  expiryDate: '',
-                  cardHolderName: '',
-                  cvvCode: '123',
-                  bankName: 'User\'s Bank',
-                  textStyle: GoogleFonts.poppins(color: Colors.white),
-                  frontCardBorder: Border.all(color: Colors.grey),
-                  backCardBorder: Border.all(color: Colors.grey),
-                  showBackView: true,
-                  obscureCardNumber: true,
-                  obscureCardCvv: true,
-                  enableFloatingCard: true,
-                  isHolderNameVisible: true,
-                  cardBgColor: Colors.black,
-                  backgroundImage: 'assets/images/card_bg.png',
-                  isSwipeGestureEnabled: true,
-                  onCreditCardWidgetChange:
-                      (CreditCardBrand creditCardBrand) {},
-                  customCardTypeIcons: <CustomCardTypeIcon>[
-                    CustomCardTypeIcon(
-                      cardType: CardType.mastercard, //type of card
-                      cardImage: Image.asset(
-                        'assets/images/mastercard.png',
-                        height: 48,
-                        width: 48,
-                      ),
-                    ),
-                  ],
-                ),
+                Image.asset('assets/images/samplecard.png'),
                 SizedBox(
-                  height: 320.h,
+                  height: 300,
                   child: ListView.separated(
-                    itemCount: cardScreenInfo.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(200),
-                              color: AppColors.secondaryColor.withOpacity(0.5)),
-                          child: Center(
-                              child: Image(
-                                  image: AssetImage(
-                                      cardScreenInfo[index]['icon']))),
-                        ),
-                        title: Text(
-                          cardScreenInfo[index]['title'],
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.w500),
-                        ),
-                        subtitle: Text(
-                          cardScreenInfo[index]['sub'],
-                          style: GoogleFonts.poppins(),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: 25.h,
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                CustomButton(
-                  height: h * 0.07,
-                  width: w * 0.8,
-                  color: AppColors.primaryColor,
-                  text: 'Get It Now',
-                  fontWeight: FontWeight.normal,
-                  circularRadius: 10,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(200),
+                                color:
+                                    AppColors.secondaryColor.withOpacity(0.5)),
+                            child: Center(
+                                child: Image(
+                                    image: AssetImage(
+                                        cardScreenInfo[index]['icon']))),
+                          ),
+                          title: Text(
+                            cardScreenInfo[index]['title'],
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500),
+                          ),
+                          subtitle: Text(
+                            cardScreenInfo[index]['sub'],
+                            style: GoogleFonts.poppins(),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height: 25.h,
+                        );
+                      },
+                      itemCount: cardScreenInfo.length),
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 10.h,
                   width: w,
-                )
+                ),
               ],
             ),
           ), ///////////////////////
@@ -162,7 +97,72 @@ class Cards extends StatelessWidget {
             ],
           )
         ]),
+        bottomNavigationBar: Container(
+          height: 150.h,
+          width: w,
+          decoration: BoxDecoration(color: Colors.white, boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 10)
+          ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomButton(
+                height: h * 0.06,
+                width: w * 0.8,
+                color: AppColors.primaryColor,
+                text: 'Home delivery',
+                fontWeight: FontWeight.normal,
+                circularRadius: 10,
+                fontSize: 15,
+              ),
+              Container(
+                height: h * 0.06,
+                width: w * 0.8,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border:
+                        Border.all(width: 2, color: AppColors.primaryColor)),
+                child: Center(
+                  child: Text(
+                    'Pick up from nearby merchant',
+                    style: GoogleFonts.poppins(
+                      fontSize: 15,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     ));
   }
 }
+
+
+/**
+  SizedBox(height: 10.h),
+                        CustomButton(
+                          height: h * 0.07,
+                          width: w * 0.8,
+                          color: AppColors.primaryColor,
+                          text: 'Get It Now',
+                          fontWeight: FontWeight.normal,
+                          circularRadius: 10,
+                        ),
+ */
+
+/**
+ 
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                height: 25.h,
+                              );
+                            },
+ */

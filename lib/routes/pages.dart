@@ -1,3 +1,4 @@
+import 'package:bulloak_fin_mgt_fin_mgt/referral/inviteFriends.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/routes/names.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/launch.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/login.dart';
@@ -19,7 +20,7 @@ import 'package:get/get.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/dashboard.dart';
 import '../screens/auth/recovery.dart/forgot_password.dart';
 import '../screens/navbar/navbar.dart';
-import '../screens/support.dart';
+import '../referral/referral.dart';
 
 class AppPages {
   static final List<GetPage> routes = [
@@ -100,8 +101,12 @@ class AppPages {
       page: () => const AccountLimits(),
     ),
     GetPage(
-      name: AppRoutes.support,
-      page: () => const Support(),
+      name: AppRoutes.referral,
+      page: () => const Referral(),
+    ),
+    GetPage(
+      name: AppRoutes.inviteFriends,
+      page: () => const InviteFriends(),
     ),
   ];
 }

@@ -223,7 +223,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 20),
               // 3
               GestureDetector(
-                onTap: () => Get.toNamed('/support'),
+                onTap: () {},
                 child: Container(
                   height: 50.h,
                   width: w,

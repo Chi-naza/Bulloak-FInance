@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../colors.dart';
 import '../data/cardscreeninfo.dart';
@@ -46,7 +47,7 @@ class Cards extends StatelessWidget {
               children: [
                 Image.asset('assets/images/samplecard.png'),
                 SizedBox(
-                  height: 300,
+                  height: 300.h,
                   child: ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
@@ -76,14 +77,51 @@ class Cards extends StatelessWidget {
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
-                          height: 25.h,
+                          height: 10.h,
                         );
                       },
                       itemCount: cardScreenInfo.length),
                 ),
-                SizedBox(
-                  height: 10.h,
+                Container(
+                  height: 150.h,
                   width: w,
+                  decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 10)
+                  ]),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomButton(
+                        height: h * 0.06,
+                        width: w * 0.8,
+                        color: AppColors.primaryColor,
+                        text: 'Home delivery',
+                        fontWeight: FontWeight.normal,
+                        circularRadius: 10,
+                        fontSize: 15,
+                      ),
+                      Container(
+                        height: h * 0.06,
+                        width: w * 0.8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                width: 2, color: AppColors.primaryColor)),
+                        child: Center(
+                          child: Text(
+                            'Pick up from nearby merchant',
+                            style: GoogleFonts.poppins(
+                              fontSize: 15,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -95,74 +133,9 @@ class Cards extends StatelessWidget {
                 width: w,
               )
             ],
-          )
-        ]),
-        bottomNavigationBar: Container(
-          height: 150.h,
-          width: w,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 10)
-          ]),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomButton(
-                height: h * 0.06,
-                width: w * 0.8,
-                color: AppColors.primaryColor,
-                text: 'Home delivery',
-                fontWeight: FontWeight.normal,
-                circularRadius: 10,
-                fontSize: 15,
-              ),
-              Container(
-                height: h * 0.06,
-                width: w * 0.8,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border:
-                        Border.all(width: 2, color: AppColors.primaryColor)),
-                child: Center(
-                  child: Text(
-                    'Pick up from nearby merchant',
-                    style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                ),
-              )
-            ],
           ),
-        ),
+        ]),
       ),
     ));
   }
 }
-
-
-/**
-  SizedBox(height: 10.h),
-                        CustomButton(
-                          height: h * 0.07,
-                          width: w * 0.8,
-                          color: AppColors.primaryColor,
-                          text: 'Get It Now',
-                          fontWeight: FontWeight.normal,
-                          circularRadius: 10,
-                        ),
- */
-
-/**
- 
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return SizedBox(
-                                height: 25.h,
-                              );
-                            },
- */

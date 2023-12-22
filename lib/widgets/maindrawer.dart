@@ -121,7 +121,7 @@ class MainDrawer extends StatelessWidget {
                 ],
               ),
               ListTile(
-                onTap: () {},
+                onTap: () => Get.toNamed('/referral'),
                 leading: const Icon(Icons.people_outline),
                 title: Text('Referrals', style: GoogleFonts.poppins()),
               ),

@@ -1,5 +1,5 @@
 class AppRoutes {
-  static const splashscreen = '/splashscreen';
+  static const splashscreen = '/splashScreen';
   static const INITIAL = '/';
   static const login = '/login';
   static const signup = '/signup';
@@ -17,10 +17,9 @@ class AppRoutes {
   static const profile = '/profile';
   static const cards = '/cards';
   static const navbar = '/homeNav';
-
-  // static const Login = '/login';
-  // static const INITIAL = '/';
-  // static const INITIAL = '/';
-  // static const INITIAL = '/';
-  // static const INITIAL = '/';
+  static const totalAssets = '/totalAssets';
+  static const accountLimits = '/accountLimits';
+  static const support = '/support';
+  static const referral = '/referral';
+  static const inviteFriends = '/inviteFriends';
 }

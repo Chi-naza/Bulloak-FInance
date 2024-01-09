@@ -18,7 +18,6 @@ class _AccBalState extends State<AccBal> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final _controller = PageController();
 
     return SafeArea(
       child: Scaffold(

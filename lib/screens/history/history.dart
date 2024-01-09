@@ -1,5 +1,6 @@
 import 'package:bulloak_fin_mgt_fin_mgt/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -131,7 +132,51 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
         ),
         body: Center(
           child: Column(children: [
-            Image.asset('assets/images/creditcard.png'),
+            CreditCardWidget(
+              glassmorphismConfig: Glassmorphism(
+                blurX: 0,
+                blurY: 0,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                    Colors.grey.withAlpha(20),
+                    Colors.white.withAlpha(20),
+                  ],
+                  stops: const <double>[
+                    0.3,
+                    0,
+                  ],
+                ),
+              ),
+              cardNumber: '',
+              expiryDate: '',
+              cardHolderName: '',
+              cvvCode: '123',
+              bankName: 'User\'s Bank',
+              textStyle: GoogleFonts.poppins(color: Colors.white),
+              frontCardBorder: Border.all(color: Colors.grey),
+              backCardBorder: Border.all(color: Colors.grey),
+              showBackView: true,
+              obscureCardNumber: true,
+              obscureCardCvv: true,
+              enableFloatingCard: true,
+              isHolderNameVisible: true,
+              cardBgColor: Colors.black,
+              backgroundImage: 'assets/images/card_bg.png',
+              isSwipeGestureEnabled: true,
+              onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
+              customCardTypeIcons: <CustomCardTypeIcon>[
+                CustomCardTypeIcon(
+                  cardType: CardType.mastercard, //type of card
+                  cardImage: Image.asset(
+                    'assets/images/mastercard.png',
+                    height: 48,
+                    width: 48,
+                  ),
+                ),
+              ],
+            ),
             SingleChildScrollView(
               child: Container(
                 width: w,

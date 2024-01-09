@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,6 +13,7 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
+    super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 5), () {
       Get.offAllNamed('/');
@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
+    super.dispose();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
   }
@@ -33,21 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     return Scaffold(
       body: Center(
-        child: Container(
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-              border: Border.all(
-                width: 2,
-                color: Colors.black,
-              ),
-              borderRadius: BorderRadius.circular(100)),
-          child: Center(
-            child: Text('LOGO',
-                style:
-                    GoogleFonts.inter(fontSize: w * 0.06, color: Colors.black)),
-          ),
-        ),
+        child: Image.asset('assets/images/bulloaklogo.png'),
       ),
     );
   }

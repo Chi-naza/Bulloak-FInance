@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../colors.dart';
 import '../../widgets/custom_button.dart';
 
@@ -22,15 +20,11 @@ class LaunchScreen extends StatelessWidget {
             width: 200,
             decoration: BoxDecoration(
                 border: Border.all(
-                  width: 2,
+                  width: 1,
                   color: Colors.black,
                 ),
                 borderRadius: BorderRadius.circular(100)),
-            child: Center(
-              child: Text('LOGO',
-                  style: GoogleFonts.inter(
-                      fontSize: w * 0.06, color: Colors.black)),
-            ),
+            child: Center(child: Image.asset('assets/images/bulloaklogo.png')),
           ),
         ),
       ),

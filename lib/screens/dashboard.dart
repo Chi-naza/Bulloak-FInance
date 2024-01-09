@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/dashboard_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/plan_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../colors.dart';
-import '../data/inv_options.dart';
 import '../widgets/categories_column.dart';
 import '../widgets/chart_view.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/maindrawer.dart';
 import 'transactions/deposit.dart';
-import 'transactions/withdraw.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -39,6 +38,7 @@ class _HomePageState extends State<DashBoard> {
 
   var planController = Get.find<PlanController>();
   var txnController = Get.find<TransactionController>();
+  var dashController = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -257,8 +257,8 @@ class _HomePageState extends State<DashBoard> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // planController.fetchPlanHistory();
-                              txnController.fetchAllTransactions();
+                              // dashController.fetchUserDetail();
+                              dashController.getUserDashboardDetail();
                             },
                             child: Text(
                               'Statistics',

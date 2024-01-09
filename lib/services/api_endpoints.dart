@@ -33,4 +33,10 @@ class BulloakAPI {
 
   // REFERRAL
   static const String referralEndpoint = "$baseUrl/referral/"; //GET
+
+  // DASHBOARD
+  static getUserDashboardDetail(String userID) =>
+      "$baseUrl/user/dashboard/user/$userID"; // GET
+
+  static const getUserEndpoint = "$baseUrl/user/dashboard/users";
 }

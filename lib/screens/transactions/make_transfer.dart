@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:number_text_input_formatter/number_text_input_formatter.dart';
 
 import '../../colors.dart';
-import '../../controllers/transferController.dart';
 import '../../widgets/custom_button.dart';
 
 class MakeTransfer extends StatefulWidget {

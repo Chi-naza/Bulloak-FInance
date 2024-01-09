@@ -44,10 +44,11 @@ class AppPages {
         name: AppRoutes.otpverify,
         page: () => const OTPVerification(),
         transition: Transition.rightToLeft),
-    // GetPage(
-    //     name: AppRoutes.homenav,
-    //     page: () => const HomeNav(),
-    //     transition: Transition.rightToLeft),
+    GetPage(
+      name: AppRoutes.homenav,
+      page: () => const HomeNav(),
+      transition: Transition.rightToLeft,
+    ),
     GetPage(
         name: AppRoutes.resetPSWD,
         page: () => const ResetPSWD(),

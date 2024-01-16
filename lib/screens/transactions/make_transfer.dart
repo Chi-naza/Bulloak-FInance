@@ -171,6 +171,7 @@ class _MakeTransferState extends State<MakeTransfer> {
                         keyboardType: TextInputType.number,
                         style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
+                          hintText: 'Enter Amount Here eg 12.90',
                           focusedBorder: const OutlineInputBorder(
                             // borderRadius: BorderRadius.circular(w * 0.05),
                             borderSide: BorderSide(

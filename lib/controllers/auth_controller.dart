@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:bulloak_fin_mgt_fin_mgt/routes/names.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery.dart/resetPSWD.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/services/api_endpoints.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/services/helper_methods.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/widgets/custom_snackbar.dart';
@@ -15,12 +15,6 @@ class AuthController extends GetxController {
 
   // loading
   final isLoading = false.obs;
-
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-  }
 
   Future<void> signUpUser({
     required String email,
@@ -94,9 +88,6 @@ class AuthController extends GetxController {
     // shared pref
     final shp = await SharedPreferences.getInstance();
 
-    email = "admin@gmail.com";
-    password = "admin";
-
     var myBody = jsonEncode({
       "email": email,
       "password": password,
@@ -123,7 +114,7 @@ class AuthController extends GetxController {
 
         isLoading.value = false;
         bulloakSnackbar(isError: false, message: 'Login Successful');
-        Get.offAllNamed(AppRoutes.homenav);
+        Get.offAllNamed(AppRoutes.dashboard);
       } else {
         isLoading.value = false;
         if (response.body['Error'] != null) {
@@ -244,6 +235,14 @@ class AuthController extends GetxController {
             "${response.statusText!}: invalid or expired verification code",
         isError: true,
       );
+    }
+  }
+
+  Future<void> logoutUser() async {
+    var sp = await SharedPreferences.getInstance();
+    if (await sp.clear()) {
+      bulloakSnackbar(isError: false, message: "Logout Successful");
+      Get.toNamed(AppRoutes.login);
     }
   }
 }

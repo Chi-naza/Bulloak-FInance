@@ -28,11 +28,13 @@ class TransactionController extends GetxController {
 
   // referral list
   final referralList = <ReferralModel>[].obs;
+  final referralListHistory = <TransactionModel>[].obs;
 
   @override
   void onReady() {
     fetchAllTransactions();
     fetchWithdrawalHistory();
+    fetchMyReferrals();
     super.onReady();
   }
 
@@ -66,7 +68,7 @@ class TransactionController extends GetxController {
       if (response.statusCode == 200) {
         isLoading.value = false;
         bulloakSnackbar(isError: false, message: 'WWithdrawal Successful!');
-        Get.toNamed(AppRoutes.homenav);
+        Get.toNamed(AppRoutes.dashboard);
       } else {
         isLoading.value = false;
         bulloakSnackbar(isError: true, message: "Withdrawal failed");
@@ -108,7 +110,7 @@ class TransactionController extends GetxController {
         isLoading.value = false;
         bulloakSnackbar(
             isError: false, message: "Successful! ${response.body}");
-        Get.toNamed(AppRoutes.homenav);
+        Get.toNamed(AppRoutes.dashboard);
       } else {
         isLoading.value = false;
         bulloakSnackbar(isError: true, message: "DEPOSIT txn failed");
@@ -230,7 +232,7 @@ class TransactionController extends GetxController {
         isLoading.value = false;
         bulloakSnackbar(
             isError: false, message: "Transfer Successful! ${response.body}");
-        Get.toNamed(AppRoutes.homenav);
+        Get.toNamed(AppRoutes.dashboard);
       } else {
         isLoading.value = false;
         bulloakSnackbar(isError: true, message: "TRANSFER txn failed");
@@ -260,7 +262,18 @@ class TransactionController extends GetxController {
           dataList.add(ReferralModel.fromJson(a));
         }
         referralList.assignAll(dataList);
-        if (kDebugMode) print(dataList);
+
+        var dataList2 = <TransactionModel>[];
+        for (var ref in referralList) {
+          dataList2.add(TransactionModel(
+            usdtAmount: ref.referralProfit,
+            description: ref.referredUser!.email,
+          ));
+        }
+        referralListHistory.assignAll(dataList2);
+
+        if (kDebugMode) print(referralList);
+        if (kDebugMode) print("REFERRAL TXN - $referralListHistory");
       } else {
         isLoading.value = false;
         if (kDebugMode) print("Failed To Get ALL REFERRALs");

@@ -27,6 +27,7 @@ class PlanController extends GetxController {
   @override
   void onReady() {
     fetchAllPlans();
+    fetchPlanHistory();
     super.onReady();
   }
 

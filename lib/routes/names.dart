@@ -1,6 +1,6 @@
 class AppRoutes {
-  static const splashscreen = '/splashScreen';
-  static const INITIAL = '/';
+  static const splashscreen = '/';
+  static const INITIAL = '/launch';
   static const login = '/login';
   static const signup = '/signup';
   static const forgotpswd = '/forgotpswd';

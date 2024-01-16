@@ -1,4 +1,5 @@
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/auth_controller.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../colors.dart';
 import '../../widgets/custom_button.dart';
-import 'recovery.dart/resetPSWD.dart';
 
 class OTPVerification extends StatefulWidget {
   const OTPVerification({super.key});

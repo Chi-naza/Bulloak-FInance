@@ -1,3 +1,4 @@
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/auth_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/history/history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -127,7 +128,10 @@ class MainDrawer extends StatelessWidget {
               ),
               Divider(color: Colors.grey.shade800),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  var authController = Get.find<AuthController>();
+                  authController.logoutUser();
+                },
                 leading: const Icon(Icons.logout_outlined),
                 title: Text('Log Out', style: GoogleFonts.poppins()),
               ),

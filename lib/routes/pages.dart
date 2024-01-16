@@ -5,7 +5,7 @@ import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/login.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/otp_verification.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/profile/account_limits.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/profile/profile.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery.dart/resetPSWD.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/sign_up.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/cards.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/history/transactionhistory.dart';
@@ -18,24 +18,26 @@ import 'package:bulloak_fin_mgt_fin_mgt/screens/transactions/withdraw.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/dashboard.dart';
-import '../screens/auth/recovery.dart/forgot_password.dart';
+import '../screens/auth/recovery/forgot_password.dart';
 import '../screens/navbar/navbar.dart';
 import '../referral/referral.dart';
 
 class AppPages {
   static final List<GetPage> routes = [
     GetPage(
-        name: AppRoutes.splashscreen,
-        page: () => const SplashScreen(),
-        transition: Transition.rightToLeft),
+      name: AppRoutes.splashscreen,
+      page: () => const SplashScreen(),
+      transition: Transition.rightToLeft,
+    ),
     GetPage(
         name: AppRoutes.INITIAL,
         page: () => const LaunchScreen(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: AppRoutes.login,
-        page: () => const LoginScreen(),
-        transition: Transition.rightToLeft),
+      name: AppRoutes.login,
+      page: () => const LoginScreen(),
+      transition: Transition.rightToLeft,
+    ),
     GetPage(
         name: AppRoutes.signup,
         page: () => const SignUpScreen(),
@@ -106,7 +108,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.inviteFriends,
-      page: () => const InviteFriends(),
+      page: () => InviteFriends(),
     ),
   ];
 }

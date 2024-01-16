@@ -22,11 +22,6 @@ class DashBoard extends StatefulWidget {
 }
 
 class _HomePageState extends State<DashBoard> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _advancedDrawerController = AdvancedDrawerController();
   bool customIcon = false;
@@ -36,14 +31,21 @@ class _HomePageState extends State<DashBoard> {
     const Color(0xffFF03A9).withOpacity(0.5),
   ];
 
-  var planController = Get.find<PlanController>();
   var txnController = Get.find<TransactionController>();
   var dashController = Get.find<DashboardController>();
+
+  @override
+  void initState() {
+    dashController.getUserDashboardDetail();
+    txnController.fetchWithdrawalHistory();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    var user = dashController.userDashboardInfo.value;
 
     //deposit and withdrawal buttons decoration
     final kInnerDecoration = BoxDecoration(
@@ -105,7 +107,7 @@ class _HomePageState extends State<DashBoard> {
                         left: w * 0.04,
                         child: Container(
                           margin: EdgeInsets.only(top: h * 0.05),
-                          height: h * 0.2, width: w * 0.8,
+                          height: h * 0.3, width: w * 0.8,
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
                                   begin: Alignment.bottomLeft,
@@ -194,7 +196,7 @@ class _HomePageState extends State<DashBoard> {
                                             width: 3,
                                           ),
                                           Text(
-                                            '47,300.00',
+                                            "${user.totalDeposits}", //'47,300.00',
                                             style: GoogleFonts.poppins(
                                               fontSize: w * 0.065,
                                               fontWeight: FontWeight.w600,
@@ -222,7 +224,7 @@ class _HomePageState extends State<DashBoard> {
                                             width: 1,
                                           ),
                                           Text(
-                                            '2,535.40',
+                                            "${user.totalWithdrawals}", //'2,535.40',
                                             style: GoogleFonts.poppins(
                                               fontSize: w * 0.04,
                                               fontWeight: FontWeight.w600,
@@ -233,7 +235,7 @@ class _HomePageState extends State<DashBoard> {
                                             width: w * 0.03,
                                           ),
                                           Text(
-                                            '5.7%',
+                                            "${user.totalBonuses}%", //'5.7%',
                                             style: GoogleFonts.poppins(
                                               fontSize: w * 0.038,
                                               fontWeight: FontWeight.w500,
@@ -255,18 +257,12 @@ class _HomePageState extends State<DashBoard> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              // dashController.fetchUserDetail();
-                              dashController.getUserDashboardDetail();
-                            },
-                            child: Text(
-                              'Statistics',
-                              style: GoogleFonts.poppins(
-                                  color: AppColors.primaryColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          Text(
+                            'Statistics',
+                            style: GoogleFonts.poppins(
+                                color: AppColors.primaryColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             'Details >',
@@ -300,28 +296,21 @@ class _HomePageState extends State<DashBoard> {
                               padding: const EdgeInsets.all(2.0),
                               child: Container(
                                 decoration: kInnerDecoration,
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    var pc = Get.find<TransactionController>();
-                                    await pc.fetchAllTransactions();
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(right: w * 0.03),
-                                        child: Text(
-                                          "Deposit",
-                                          style: GoogleFonts.poppins(
-                                            fontSize: w * 0.04,
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: w * 0.03),
+                                      child: Text(
+                                        "Deposit",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: w * 0.04,
+                                          fontWeight: FontWeight.w400,
                                         ),
                                       ),
-                                      Image.asset('assets/icons/deposit.png')
-                                    ],
-                                  ),
+                                    ),
+                                    Image.asset('assets/icons/deposit.png')
+                                  ],
                                 ),
                               ),
                             ),

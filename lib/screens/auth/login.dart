@@ -172,12 +172,14 @@ class _SignUpScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Checkbox(
-                    value: rememberMe,
-                    onChanged: (value) {
-                      setState(() {
-                        rememberMe = value!;
-                      });
-                    }),
+                  value: rememberMe,
+                  onChanged: (value) {
+                    setState(() {
+                      rememberMe = value!;
+                    });
+                    print("REMEMBER ME: $rememberMe");
+                  },
+                ),
                 Text(
                   'Remeber Me',
                   style: GoogleFonts.poppins(fontSize: h * 0.02),

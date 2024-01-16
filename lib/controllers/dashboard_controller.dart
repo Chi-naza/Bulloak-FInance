@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardController extends GetxController {
   final isLoading = false.obs;
-  late String stringResponse;
+  // late String stringResponse;
 
   // get connect
   final _getConnect = GetConnect();
@@ -27,14 +27,6 @@ class DashboardController extends GetxController {
     initDashboard();
     super.onReady();
   }
-
-  // Future fetchUserData() async {
-  //   http.Response response;
-  //   response = await http.get(Uri.parse(BulloakAPI.userEndPoint));
-  //   if (response.statusCode == 200) {
-  //     print(response);
-  //   }
-  // }
 
   Future<void> initDashboard() async {
     await fetchUserDetail();

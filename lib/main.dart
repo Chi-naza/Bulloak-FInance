@@ -1,8 +1,5 @@
+import 'package:bulloak_fin_mgt_fin_mgt/bindings/app_bindings.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/colors.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/controllers/auth_controller.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/controllers/dashboard_controller.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/controllers/plan_controller.dart';
-import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  AppBindings().dependencies();
   runApp(const MyApp());
 }
 
@@ -37,12 +36,6 @@ class MyApp extends StatelessWidget {
           ),
           // initialRoute: '/homeNav',
           getPages: AppPages.routes,
-          onInit: () {
-            Get.put(AuthController(), permanent: true);
-            Get.put(PlanController(), permanent: true);
-            Get.put(TransactionController(), permanent: true);
-            Get.put(DashboardController());
-          },
         ),
       ),
     );

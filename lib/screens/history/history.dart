@@ -1,9 +1,13 @@
 import 'package:bulloak_fin_mgt_fin_mgt/colors.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/dashboard_controller.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/models/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 final bucketGlobal = PageStorageBucket();
 
@@ -17,6 +21,9 @@ class History extends StatefulWidget {
 class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
+  var txnController = Get.find<TransactionController>();
+  var dashController = Get.find<DashboardController>();
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +33,9 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     _tabController.dispose();
+    txnController.fetchAllTransactions();
+    txnController.fetchWithdrawalHistory();
+    txnController.fetchMyReferrals();
     super.dispose();
   }
 
@@ -45,75 +55,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
     ),
     Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
-      child: Tab(text: 'Investments'),
-    ),
-  ];
-
-  //tab body
-  final List<Widget> _tabsBody = [
-    ReusableTabBody(
-      key: const PageStorageKey('pageOne'),
-      avatar: const CircleAvatar(
-        backgroundColor: Colors.white,
-        radius: 25,
-        child: Icon(
-          Icons.arrow_upward,
-          color: AppColors.secondaryColor,
-        ),
-      ),
-      title: Text('Today 4:17pm', style: GoogleFonts.poppins(fontSize: 12)),
-      subtitle: Text('Andre Bethel',
-          style:
-              GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500)),
-      trailing: Text('\$10.00',
-          style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: AppColors.secondaryColor,
-              fontWeight: FontWeight.w400)),
-    ),
-    ReusableTabBody(
-      key: const PageStorageKey('pageTwo'),
-      avatar: const CircleAvatar(
-        backgroundColor: Colors.white,
-        radius: 25,
-        child: Icon(
-          Icons.arrow_downward,
-          color: Colors.redAccent,
-        ),
-      ),
-      title: Text('Today 4:17pm', style: GoogleFonts.poppins(fontSize: 12)),
-      subtitle: Text('User',
-          style:
-              GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500)),
-      trailing: Text('\$10.00',
-          style: GoogleFonts.poppins(
-              fontSize: 13, color: Colors.red, fontWeight: FontWeight.w400)),
-    ),
-    ReusableTabBody(
-      key: const PageStorageKey('pageThree'),
-      avatar: const CircleAvatar(backgroundColor: Colors.white, radius: 25),
-      title: Text('Today 4:17pm', style: GoogleFonts.poppins(fontSize: 12)),
-      subtitle: Text('User',
-          style:
-              GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500)),
-      trailing: Text('\$10.00',
-          style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: AppColors.secondaryColor,
-              fontWeight: FontWeight.w400)),
-    ),
-    ReusableTabBody(
-      key: const PageStorageKey('pageFour'),
-      avatar: const CircleAvatar(backgroundColor: Colors.white, radius: 25),
-      title: Text('Today 4:17pm', style: GoogleFonts.poppins(fontSize: 12)),
-      subtitle: Text('User',
-          style:
-              GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500)),
-      trailing: Text('\$10.00',
-          style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: AppColors.secondaryColor,
-              fontWeight: FontWeight.w400)),
+      child: Tab(text: 'Transfers'),
     ),
   ];
 
@@ -121,6 +63,8 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
+    var userName =
+        "${dashController.userDashboardInfo.value.profile!.user!.username}";
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -151,13 +95,13 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
               ),
               cardNumber: '',
               expiryDate: '',
-              cardHolderName: '',
+              cardHolderName: userName,
               cvvCode: '123',
               bankName: 'User\'s Bank',
               textStyle: GoogleFonts.poppins(color: Colors.white),
               frontCardBorder: Border.all(color: Colors.grey),
               backCardBorder: Border.all(color: Colors.grey),
-              showBackView: true,
+              showBackView: false,
               obscureCardNumber: true,
               obscureCardCvv: true,
               enableFloatingCard: true,
@@ -180,7 +124,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
             SingleChildScrollView(
               child: Container(
                 width: w,
-                height: 480.h,
+                height: 452.h,
                 decoration: BoxDecoration(
                   color: AppColors.secondaryColor.withOpacity(0.1),
                   borderRadius: const BorderRadius.only(
@@ -190,46 +134,75 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                 ),
                 child: PageStorage(
                   bucket: bucketGlobal,
-                  child: Column(children: [
-                    Padding(
-                      padding: EdgeInsets.all(h * 0.015),
-                      child: Container(
-                        height: h * 0.008,
-                        width: w * 0.1,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffAAAAAA),
-                            borderRadius: BorderRadius.circular(50)),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(h * 0.015),
+                        child: Container(
+                          height: h * 0.008,
+                          width: w * 0.1,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffAAAAAA),
+                              borderRadius: BorderRadius.circular(50)),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: kToolbarHeight - 33,
-                              child: TabBar(
-                                // isScrollable: true,
-                                controller: _tabController,
-                                tabs: _tabs,
-                                labelColor: Colors.white,
-                                indicator: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(80),
-                                    color: AppColors.primaryColor),
-                                indicatorSize: TabBarIndicatorSize.label,
-                                labelPadding: EdgeInsets.zero,
-                                indicatorPadding: EdgeInsets.zero,
-                                padding: EdgeInsets.zero,
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: kToolbarHeight - 33,
+                                child: TabBar(
+                                  // isScrollable: true,
+                                  controller: _tabController,
+                                  tabs: _tabs,
+                                  labelColor: Colors.white,
+                                  indicator: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(80),
+                                      color: AppColors.primaryColor),
+                                  indicatorSize: TabBarIndicatorSize.label,
+                                  labelPadding: EdgeInsets.zero,
+                                  indicatorPadding: EdgeInsets.zero,
+                                  padding: EdgeInsets.zero,
+                                ),
                               ),
-                            ),
-                          ],
-                        )),
-                    Expanded(
+                            ],
+                          )),
+                      Expanded(
                         flex: 14,
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: _tabsBody,
-                        ))
-                  ]),
+                        child: Obx(
+                          () {
+                            return TabBarView(
+                              controller: _tabController,
+                              children: [
+                                ReusableTabBody(
+                                  key: const PageStorageKey('pageOne'),
+                                  dataObjectList:
+                                      txnController.depositTxnList.value,
+                                ),
+                                ReusableTabBody(
+                                  key: const PageStorageKey('pageTwo'),
+                                  dataObjectList:
+                                      txnController.withdrawTxnList.value,
+                                ),
+                                ReusableTabBody(
+                                  key: const PageStorageKey('pageThree'),
+                                  dataObjectList:
+                                      txnController.referralListHistory.value,
+                                  isReferral: true,
+                                ),
+                                ReusableTabBody(
+                                  key: const PageStorageKey('pageFour'),
+                                  dataObjectList:
+                                      txnController.transferTxnList.value,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )
@@ -241,17 +214,15 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
 }
 
 class ReusableTabBody extends StatelessWidget {
-  final CircleAvatar avatar;
-  final Widget title;
-  final Widget subtitle;
-  final Widget trailing;
+  final List<TransactionModel> dataObjectList;
+  final bool isWithdrawal;
+  final bool isReferral;
 
   const ReusableTabBody({
     super.key,
-    required this.avatar,
-    required this.title,
-    required this.subtitle,
-    required this.trailing,
+    required this.dataObjectList,
+    this.isWithdrawal = false,
+    this.isReferral = false,
   });
 
   @override
@@ -259,15 +230,37 @@ class ReusableTabBody extends StatelessWidget {
     return SizedBox(
       height: 150,
       child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: avatar,
-              title: title,
-              subtitle: subtitle,
-              trailing: trailing,
-            );
-          }),
+        itemCount: dataObjectList.length,
+        itemBuilder: (context, index) {
+          var data = dataObjectList[index];
+          var dateTime =
+              isReferral ? DateTime.now() : DateTime.parse(data.created!);
+          var actualDate = isReferral
+              ? "Referred Email Address"
+              : DateFormat.yMEd().format(dateTime);
+          print("Actual DATE: $actualDate");
+
+          return ListTile(
+            title: Text(
+              actualDate, //'Today 4:17pm',
+              style: GoogleFonts.poppins(fontSize: 12),
+            ),
+            subtitle: Text(
+              "${data.description}", //'Andre Bethel',
+              style: GoogleFonts.poppins(
+                  fontSize: 13, fontWeight: FontWeight.w800),
+            ),
+            trailing: Text(
+              '\$${double.parse(data.usdtAmount ?? '0.00').toStringAsFixed(2)}',
+              style: GoogleFonts.poppins(
+                fontSize: 13,
+                color: isWithdrawal ? Colors.red : AppColors.secondaryColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

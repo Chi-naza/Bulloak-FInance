@@ -79,7 +79,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/playstore.png"
+  image_path: "assets/images/bulloaklogo.png"
 
 # The following section is specific to Flutter packages.
 flutter:

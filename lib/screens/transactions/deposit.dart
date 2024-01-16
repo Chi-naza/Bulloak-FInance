@@ -81,6 +81,7 @@ class _DepositState extends State<Deposit> {
                       Container(
                         padding: EdgeInsets.only(top: h * 0.02),
                         child: TextFormField(
+                          controller: amountController,
                           inputFormatters: [
                             NumberTextInputFormatter(
                               integerDigits: 10,
@@ -125,6 +126,7 @@ class _DepositState extends State<Deposit> {
                       Container(
                         padding: EdgeInsets.only(top: h * 0.02),
                         child: TextFormField(
+                          controller: usdtAmountController,
                           inputFormatters: [
                             NumberTextInputFormatter(
                               integerDigits: 10,
@@ -200,6 +202,7 @@ class _DepositState extends State<Deposit> {
                       Container(
                         padding: EdgeInsets.only(top: h * 0.02),
                         child: TextFormField(
+                          controller: walletAddressController,
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
@@ -236,7 +239,7 @@ class _DepositState extends State<Deposit> {
                       // calling deposit function
                       txnController.depositMyFunds(
                         amount: amountController.text.trim(),
-                        walletAddress: walletAddressController.text,
+                        walletAddress: walletAddressController.text.trim(),
                         usdtAmount: usdtAmountController.text.trim(),
                         walletType: _selectedVal,
                       );

@@ -42,7 +42,7 @@ class InviteFriends extends StatelessWidget {
               ),
               SizedBox(height: 10.h),
               Text(
-                '${user.profile!.user!.username!.toUpperCase()}1189',
+                '${user.profile!.user!.username ?? "User".toUpperCase()}1189',
                 style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 30.sp,

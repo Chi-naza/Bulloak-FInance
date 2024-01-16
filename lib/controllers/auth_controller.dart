@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/dashboard_controller.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/routes/names.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/services/api_endpoints.dart';
@@ -85,6 +87,9 @@ class AuthController extends GetxController {
     // loading
     isLoading.value = true;
 
+    var txnController = Get.find<TransactionController>();
+    var dashController = Get.find<DashboardController>();
+
     // shared pref
     final shp = await SharedPreferences.getInstance();
 
@@ -111,6 +116,9 @@ class AuthController extends GetxController {
         await shp.setString(TOKEN, response.body["token"]["access"]);
 
         print("TOKEN FROM DB: ${response.body["token"]["access"]}");
+
+        dashController.getUserDashboardDetail();
+        txnController.fetchWithdrawalHistory();
 
         isLoading.value = false;
         bulloakSnackbar(isError: false, message: 'Login Successful');

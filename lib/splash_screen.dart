@@ -25,11 +25,20 @@ class _SplashScreenState extends State<SplashScreen>
       var sp = await SharedPreferences.getInstance();
       bool isRemember = sp.getBool(IS_REMEMBER) ?? false;
       String token = sp.getString(TOKEN) ?? "";
+      String password = sp.getString(PASSWORD) ?? "";
+      String email = sp.getString(EMAIL) ?? "";
 
       print("IS REMEMBER: $isRemember");
       print("TOKEN $token");
 
       if (isRemember && token.isNotEmpty) {
+        // login user
+        authController.signInUser(
+          email: email,
+          password: password,
+          rememberMe: true,
+          fromSplashScreen: true,
+        );
         Get.offAllNamed(AppRoutes.dashboard);
       } else {
         Get.offAllNamed(AppRoutes.INITIAL);

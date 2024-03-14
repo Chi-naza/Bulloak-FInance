@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:timer_count_down/timer_controller.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 import '../../colors.dart';
 import '../../widgets/custom_button.dart';
 
 class OTPVerification extends StatefulWidget {
-  const OTPVerification({super.key});
+  final String email;
+
+  const OTPVerification({super.key, required this.email});
 
   @override
   State<OTPVerification> createState() => _OTPVerificationState();
@@ -20,13 +24,18 @@ class _OTPVerificationState extends State<OTPVerification> {
   // auth controller
   var authController = Get.find<AuthController>();
 
+  // Controller
+  CountdownController _timerController = CountdownController(autoStart: true);
+
+  bool isTimerEnded = false;
+
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
 
     String otpGotten = '';
-    int resendTime = 26;
+
     return SafeArea(
       child: SafeArea(
         child: Scaffold(
@@ -86,18 +95,60 @@ class _OTPVerificationState extends State<OTPVerification> {
                     ),
                   ),
                 ),
-                Text(
-                  'Resend code in ${resendTime}s',
-                  style: GoogleFonts.poppins(
+                Countdown(
+                  controller: _timerController,
+                  seconds: 30,
+                  build: (_, double time) => Text(
+                    "Resend code in $time",
+                    style: TextStyle(
                       fontSize: w * 0.037,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black.withOpacity(0.8)),
+                    ),
+                  ),
+                  interval: const Duration(seconds: 1),
+                  onFinished: () {
+                    setState(() {
+                      isTimerEnded = true;
+                    });
+                  },
                 ),
+                // Text(
+                //   'Resend code in ${resendTime}s',
+                //   style: GoogleFonts.poppins(
+                //       fontSize: w * 0.037,
+                //       fontWeight: FontWeight.w500,
+                //       color: Colors.black.withOpacity(0.8)),
+                // ),
+                if (isTimerEnded)
+                  Container(
+                    margin: EdgeInsets.only(top: h * 0.2),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isTimerEnded = false;
+                        });
+                        authController.resendVerificationOtp(widget.email);
+                        _timerController.restart();
+                      },
+                      child: CustomButton(
+                        height: h * 0.08,
+                        width: w * 0.8,
+                        color: AppColors.primaryColor,
+                        text: 'Resend',
+                        circularRadius: 50,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x54000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 3,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 Container(
-                  margin: EdgeInsets.only(top: h * 0.2),
+                  margin: EdgeInsets.only(top: h * 0.04),
                   child: GestureDetector(
                     onTap: () {
-                      print(otpGotten);
                       if (otpGotten.isNotEmpty) {
                         authController.verifyAccount(otpGotten);
                       } else {

@@ -7,7 +7,7 @@ const String EMAIL = "email";
 const String PASSWORD = "password";
 const String IS_REMEMBER = "is-remember";
 
-/// METHODS  /////
+/// METHODS  
 myHeaders() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String token = prefs.getString(TOKEN) ?? '';

@@ -47,10 +47,6 @@ class AppPages {
         page: () => const ForgotPSWD(),
         transition: Transition.rightToLeft),
     GetPage(
-        name: AppRoutes.otpverify,
-        page: () => const OTPVerification(),
-        transition: Transition.rightToLeft),
-    GetPage(
         name: AppRoutes.resetPSWD,
         page: () => const ResetPSWD(),
         transition: Transition.rightToLeft),

@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/dashboard_controller.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/controllers/plan_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/controllers/transaction_controller.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/routes/names.dart';
+import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/otp_verification.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/screens/auth/recovery/resetPSWD.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/services/api_endpoints.dart';
 import 'package:bulloak_fin_mgt_fin_mgt/services/helper_methods.dart';
@@ -55,7 +57,7 @@ class AuthController extends GetxController {
         isLoading.value = false;
         bulloakSnackbar(isError: false, message: 'Registration Successful');
 
-        Get.toNamed(AppRoutes.otpverify);
+        Get.to(OTPVerification(email: email));
       } else {
         isLoading.value = false;
         if (response.body['email'] != null) {
@@ -83,12 +85,14 @@ class AuthController extends GetxController {
     required String email,
     required String password,
     required bool rememberMe,
+    bool fromSplashScreen = false,
   }) async {
     // loading
     isLoading.value = true;
 
     var txnController = Get.find<TransactionController>();
     var dashController = Get.find<DashboardController>();
+    var planController = Get.find<PlanController>();
 
     // shared pref
     final shp = await SharedPreferences.getInstance();
@@ -117,12 +121,15 @@ class AuthController extends GetxController {
 
         print("TOKEN FROM DB: ${response.body["token"]["access"]}");
 
-        dashController.getUserDashboardDetail();
-        txnController.fetchWithdrawalHistory();
+        dashController.initDashboard();
+        txnController.onReady();
 
         isLoading.value = false;
-        bulloakSnackbar(isError: false, message: 'Login Successful');
+        if (!fromSplashScreen) {
+          bulloakSnackbar(isError: false, message: 'Login Successful');
+        }
         Get.offAllNamed(AppRoutes.dashboard);
+        planController.onReady();
       } else {
         isLoading.value = false;
         if (response.body['Error'] != null) {
@@ -135,7 +142,7 @@ class AuthController extends GetxController {
               .contains('This user is currently not active')) {
             bulloakSnackbar(
                 isError: true, message: 'This user is currently not active');
-            Get.toNamed(AppRoutes.otpverify);
+            Get.to(OTPVerification(email: email));
           }
         }
       }
@@ -251,6 +258,33 @@ class AuthController extends GetxController {
     if (await sp.clear()) {
       bulloakSnackbar(isError: false, message: "Logout Successful");
       Get.toNamed(AppRoutes.login);
+    }
+  }
+
+  Future<void> resendVerificationOtp(String email) async {
+    Map<String, String> resetBody = {
+      "email": email,
+    };
+
+    Response response = await _getConnect.post(
+      BulloakAPI.resendVerifyEmailOtp,
+      resetBody,
+      headers: myFreeHeaders(),
+    );
+
+    if (response.statusCode == 200) {
+      isLoading.value = false;
+      bulloakSnackbar(
+        message: "A new code has been sent to $email",
+        isError: false,
+      );
+    } else {
+      isLoading.value = false;
+      debugPrint(response.statusText);
+      bulloakSnackbar(
+        message: 'Failed to resend code to $email',
+        isError: true,
+      );
     }
   }
 }

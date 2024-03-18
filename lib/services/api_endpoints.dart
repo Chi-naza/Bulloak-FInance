@@ -1,6 +1,7 @@
 class BulloakAPI {
   //base url
-  static const String baseUrl = 'https://api.bulloak.org';
+  static const String baseUrl =
+      'https://django-bulloak-finance-production.up.railway.app';
 
   // Auth
   static const String registerEndpoint = "$baseUrl/user/auth/create/"; //POST
@@ -26,20 +27,20 @@ class BulloakAPI {
   static const String subscribeToPlanEndpoint = "$baseUrl/plans/"; // POST
 
   static const String userEndPoint = "$baseUrl/user/"; //GET
+
   /// TRANSACTIONS
   static const String getUserTransactionsEndpoint =
       "$baseUrl/transaction/dashboard"; // POST
   static const String withdrawEndpoint = "$baseUrl/withdraw/"; // POST
   static const String depositEndpoint = "$baseUrl/deposit/"; // POST
-  static const String allTxnEndpoint = "$baseUrl/transaction/dashboard"; //GET
+  static const String allTxnEndpoint = "$baseUrl/transaction/"; //GET
   static const String transferEndpoint = "$baseUrl/transfer/"; //POST
 
   // REFERRAL
   static const String referralEndpoint = "$baseUrl/referral/"; //GET
 
   // DASHBOARD
-  static getUserDashboardDetail(String userID) =>
-      "$baseUrl/user/dashboard/user/$userID"; // GET
+  static const getUserDashboardDetail = "$baseUrl/user/"; // GET
 
   static const getUserEndpoint = "$baseUrl/user/dashboard/users";
 }

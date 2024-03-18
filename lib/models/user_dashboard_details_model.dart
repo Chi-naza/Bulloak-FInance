@@ -1,24 +1,13 @@
 class UserDashboardDetailsModel {
   Profile? profile;
   List<Transactions>? transactions;
-  List<PlanHistory>? planHistory;
   List<Referrals>? referrals;
-  String? totalDeposits;
-  String? totalWithdrawals;
-  int? totalBonuses;
-  dynamic referredBy;
+  int? referralsProfit;
 
   UserDashboardDetailsModel(
-      {this.profile,
-      this.transactions,
-      this.planHistory,
-      this.referrals,
-      this.totalDeposits,
-      this.totalWithdrawals,
-      this.totalBonuses,
-      this.referredBy});
+      {this.profile, this.transactions, this.referrals, this.referralsProfit});
 
-  UserDashboardDetailsModel.fromJson(Map<dynamic, dynamic> json) {
+  UserDashboardDetailsModel.fromJson(Map<String, dynamic> json) {
     profile =
         json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
     if (json['transactions'] != null) {
@@ -27,22 +16,13 @@ class UserDashboardDetailsModel {
         transactions!.add(new Transactions.fromJson(v));
       });
     }
-    if (json['plan_history'] != null) {
-      planHistory = <PlanHistory>[];
-      json['plan_history'].forEach((v) {
-        planHistory!.add(new PlanHistory.fromJson(v));
-      });
-    }
     if (json['referrals'] != null) {
       referrals = <Referrals>[];
       json['referrals'].forEach((v) {
         referrals!.add(new Referrals.fromJson(v));
       });
     }
-    totalDeposits = json['total_deposits'];
-    totalWithdrawals = json['total_withdrawals'];
-    totalBonuses = json['total_bonuses'];
-    referredBy = json['referred_by'];
+    referralsProfit = json['referrals_profit'];
   }
 
   Map<String, dynamic> toJson() {
@@ -53,16 +33,10 @@ class UserDashboardDetailsModel {
     if (this.transactions != null) {
       data['transactions'] = this.transactions!.map((v) => v.toJson()).toList();
     }
-    if (this.planHistory != null) {
-      data['plan_history'] = this.planHistory!.map((v) => v.toJson()).toList();
-    }
     if (this.referrals != null) {
       data['referrals'] = this.referrals!.map((v) => v.toJson()).toList();
     }
-    data['total_deposits'] = this.totalDeposits;
-    data['total_withdrawals'] = this.totalWithdrawals;
-    data['total_bonuses'] = this.totalBonuses;
-    data['referred_by'] = this.referredBy;
+    data['referrals_profit'] = this.referralsProfit;
     return data;
   }
 }
@@ -70,32 +44,50 @@ class UserDashboardDetailsModel {
 class Profile {
   int? id;
   User? user;
+  dynamic fullName;
+  dynamic phoneNumber;
+  dynamic address;
   String? country;
   String? image;
   double? availableBalance;
   double? liveProfit;
   double? bookBalance;
   bool? loginemailblocked;
+  dynamic facebook;
+  dynamic instagram;
+  dynamic twitter;
 
   Profile(
       {this.id,
       this.user,
+      this.fullName,
+      this.phoneNumber,
+      this.address,
       this.country,
       this.image,
       this.availableBalance,
       this.liveProfit,
       this.bookBalance,
-      this.loginemailblocked});
+      this.loginemailblocked,
+      this.facebook,
+      this.instagram,
+      this.twitter});
 
   Profile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    fullName = json['full_name'];
+    phoneNumber = json['phone_number'];
+    address = json['address'];
     country = json['country'];
     image = json['image'];
     availableBalance = json['available_balance'];
     liveProfit = json['live_profit'];
     bookBalance = json['book_balance'];
     loginemailblocked = json['loginemailblocked'];
+    facebook = json['facebook'];
+    instagram = json['instagram'];
+    twitter = json['twitter'];
   }
 
   Map<String, dynamic> toJson() {
@@ -104,12 +96,18 @@ class Profile {
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
+    data['full_name'] = this.fullName;
+    data['phone_number'] = this.phoneNumber;
+    data['address'] = this.address;
     data['country'] = this.country;
     data['image'] = this.image;
     data['available_balance'] = this.availableBalance;
     data['live_profit'] = this.liveProfit;
     data['book_balance'] = this.bookBalance;
     data['loginemailblocked'] = this.loginemailblocked;
+    data['facebook'] = this.facebook;
+    data['instagram'] = this.instagram;
+    data['twitter'] = this.twitter;
     return data;
   }
 }
@@ -175,43 +173,6 @@ class Transactions {
     data['usdt_amount'] = this.usdtAmount;
     data['description'] = this.description;
     data['transaction_type'] = this.transactionType;
-    data['profile'] = this.profile;
-    return data;
-  }
-}
-
-class PlanHistory {
-  int? id;
-  String? amount;
-  String? profit;
-  String? created;
-  int? investmentplan;
-  int? profile;
-
-  PlanHistory(
-      {this.id,
-      this.amount,
-      this.profit,
-      this.created,
-      this.investmentplan,
-      this.profile});
-
-  PlanHistory.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    amount = json['amount'];
-    profit = json['profit'];
-    created = json['created'];
-    investmentplan = json['investmentplan'];
-    profile = json['profile'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['amount'] = this.amount;
-    data['profit'] = this.profit;
-    data['created'] = this.created;
-    data['investmentplan'] = this.investmentplan;
     data['profile'] = this.profile;
     return data;
   }

@@ -97,15 +97,15 @@ class AuthController extends GetxController {
     // shared pref
     final shp = await SharedPreferences.getInstance();
 
-    var myBody = jsonEncode({
+    var myLoginBody = {
       "email": email,
       "password": password,
-    });
+    };
 
     try {
       Response response = await _getConnect.post(
         BulloakAPI.loginEndpoint,
-        myBody,
+        myLoginBody,
         headers: myFreeHeaders(),
       );
 

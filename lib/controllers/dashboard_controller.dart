@@ -17,7 +17,6 @@ class DashboardController extends GetxController {
   final allUsersList = <UserModel>[].obs;
 
   // user data
-  final userInfo = UserModel().obs;
 
   // user dashboard data
   final userDashboardInfo = UserDashboardDetailsModel().obs;
@@ -29,12 +28,12 @@ class DashboardController extends GetxController {
   }
 
   Future<void> initDashboard() async {
-    await fetchUserDetail();
     await getUserDashboardDetail();
   }
 
-  // fetch user details
+  // fetch user details: NOT USED
   Future<void> fetchUserDetail() async {
+    final userInfo = UserModel().obs;
     // shared pref
     final shp = await SharedPreferences.getInstance();
     String? userSavedEmail = await shp.getString(EMAIL);
@@ -79,10 +78,9 @@ class DashboardController extends GetxController {
 
   // fetch user details
   Future<void> getUserDashboardDetail() async {
-    if (kDebugMode) print("User ID Gotten For Request: ${userInfo.value.id}");
     try {
       Response response = await _getConnect.get(
-        BulloakAPI.getUserDashboardDetail(userInfo.value.id.toString()),
+        BulloakAPI.getUserDashboardDetail,
         headers: await myHeaders(),
       );
 
